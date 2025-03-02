@@ -1,18 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect, useRef, Component } from 'react';
 import { Editor, Frame, Element } from '@craftjs/core';
 import html2canvas from 'html2canvas';
 import { DeviceMockup } from '../main_element';
 import { componentMap } from '../layout_map';
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  CircularProgress,
-  Box,
-  Button,
-  CardActions,
-} from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, CircularProgress, Box, Button, CardActions } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useNavigate } from 'react-router-dom';
 class ErrorBoundary extends Component<{ children: React.ReactNode }, { hasError: boolean; errorMessage: string }> {
@@ -59,11 +51,7 @@ interface LayoutItem {
   layout: any;
 }
 
-export const RenderJsonFromApi: React.FC<RenderJsonFromApiProps> = ({
-  setJsonContent,
-  onEdit,
-  onDelete,
-}) => {
+export const RenderJsonFromApi: React.FC<RenderJsonFromApiProps> = ({ setJsonContent, onEdit }) => {
   const [layoutList, setLayoutList] = useState<LayoutItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -242,20 +230,10 @@ export const RenderJsonFromApi: React.FC<RenderJsonFromApiProps> = ({
                 </Typography>
               </CardContent>
               <CardActions sx={{ justifyContent: 'space-between' }}>
-                <Button
-                  size="small"
-                  color="secondary"
-                  variant="contained"
-                  onClick={() => handleEdit(layout)}
-                >
+                <Button size="small" color="secondary" variant="contained" onClick={() => handleEdit(layout)}>
                   Edit
                 </Button>
-                <Button
-                  size="small"
-                  color="error"
-                  variant="contained"
-                  onClick={() => handleDelete(layout.id)}
-                >
+                <Button size="small" color="error" variant="contained" onClick={() => handleDelete(layout.id)}>
                   Delete
                 </Button>
               </CardActions>
@@ -272,11 +250,8 @@ export const RenderJsonFromApi: React.FC<RenderJsonFromApiProps> = ({
                 ref={(el) => {
                   frameRefs.current[layout.id] = el;
                 }}
-                style={{ width: '840px', height: '500px', background: '#fff' }}
-              >
-                <Frame data={layout.layout || {}}>
-                  {!layout.layout && <Element canvas is={DeviceMockup} />}
-                </Frame>
+                style={{ width: '840px', height: '500px', background: '#fff' }}>
+                <Frame data={layout.layout || {}}>{!layout.layout && <Element canvas is={DeviceMockup} />}</Frame>
               </div>
             </Editor>
           </ErrorBoundary>
